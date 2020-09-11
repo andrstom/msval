@@ -1,0 +1,10 @@
+parameters:
+
+database:
+
+### LOCALHOST ###
+	dsn: 'mysql:host=127.0.0.1;dbname=msval'
+	user: root
+	password: 
+	options: 
+		lazy: yes
