@@ -1,0 +1,206 @@
+{**
+ * @param string   $basePath web base path
+ * @param array    $flashes  flash messages
+ *}
+
+{import 'components/form.latte'}
+
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    
+    <meta charset="utf-8">
+    <title>{ifset title}{include title|stripHtml} | {/ifset}Mateřská školka Val</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    
+    <meta property="og:url" content="http://www.msval.cz" />
+    <meta property="og:site_name" content="www.msval.cz" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Mateřská školka Val{ifset title} | {include title|stripHtml}{/ifset}" />
+    <meta property="og:description" content="Pravá vesnická školka" />
+    <meta property="og:image" content="{$basePath}/favicon.png">
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="www.msval.cz">
+    <meta name="twitter:description" content="Pravá vesnická školka">
+    <meta name="twitter:image:src" content="{$basePath}/favicon.png">
+    
+    <meta name="description" content="Pravá vesnická školka">
+    <meta name="keywords" content="MŠ, Mateřská školka, Mateřská školka Val, MŠ Val, vesnická školka, školka val, Dobruška">
+    <meta name="author" content="Tomáš Andrš">
+    
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="{$basePath}/favicon.png" type="image/png">
+    <link rel="icon" href="{$basePath}/favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="{$basePath}/favicon.png">
+
+    <link href="{$basePath}/favicon.png" rel="icon">
+    <link href="{$basePath}/favicon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+
+    <!-- Bootstrap CSS File -->
+    <link href="{$basePath}/lib/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Libraries CSS Files -->
+    <link href="{$basePath}/lib/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="{$basePath}/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="{$basePath}/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+    <link href="{$basePath}/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="{$basePath}/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+    <!-- Main Stylesheet File -->
+    <link href="{$basePath}/css/style.css" rel="stylesheet">
+    <!-- =======================================================
+      Theme Name: BizPage
+      Theme URL: https://bootstrapmade.com/bizpage-bootstrap-business-template/
+      Author: BootstrapMade.com
+      License: https://bootstrapmade.com/license/
+    =============================================================-->
+    
+    <!--<script src="{$basePath}/lib/jquery/jquery_.min.js"></script>-->
+    <script src="{$basePath}/lib/jquery/jquery_351.js"></script>
+    
+    <!-- Nette js -->
+    <script src="{$basePath}/js/nette.ajax.js"></script>
+    <script src="{$basePath}/js/netteForms.js"></script>
+    
+    <script src="{$basePath}/lib/tinymce/tinymce.min.js"></script>
+    
+    <!-- Datatables -->
+
+    <script src="{$basePath}/lib/data-tables-1.10.2/media/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="{$basePath}/lib/data-tables-1.10.2/media/js/dataTables.bootstrap4.min.js" type="text/javascript"></script>
+    <script src="{$basePath}/lib/data-tables-1.10.2/media/js/table-nastaveni.js" type="text/javascript"></script>
+    <link href="{$basePath}/lib/data-tables-1.10.2/media/css/_jquery.dataTables.min.css" rel="stylesheet">
+    <link href="{$basePath}/lib/data-tables-1.10.2/media/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+    
+    <script>
+    tinymce.init({
+        selector: 'textarea',
+        language: 'cs_CZ',
+        plugins: 'a11ychecker advcode casechange formatpainter linkchecker lists checklist pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker emoticons image link wordcount',
+        toolbar: 'undo redo | fontsizeselect | styleselect | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | forecolor backcolor | emoticons | image | link | wordcount',
+        toolbar_drawer: 'floating',
+        content_style: 'p { margin: 0px; padding-bottom: 2px; }',
+        insertdatetime_formats: ["%H:%M:%S", "%d.%m.%Y"],
+        setup : function(ed)
+            {
+                ed.on('init', function() 
+                {
+                    this.getDoc().body.style.fontSize = '10pt';
+                    this.getDoc().body.style.fontFamily = 'sans-serif';
+                });
+            },
+    });
+    </script>
+    
+    <!--==========================
+    Header
+    ============================-->
+    <header id="header">
+        <div class="container-fluid">
+
+            <div id="logo" class="pull-left" style="color: #fff">
+                <!-- Uncomment below if you prefer to use an image logo -->
+                <img src="{$basePath}/organisations/1/logo_small.png" width="40px" alt="ms-logo" title="ms-logo" /> Mateřská školka Val
+            </div>
+
+            <nav id="nav-menu-container">
+                <ul class="nav-menu">
+                    <li><a n:href="Homepage:default" class="scroll menu-active">Hlavní stránka</a></li>
+                    {if $visible->section_about == "ANO"}<li><a n:href="Homepage:default#about">O nás</a></li>{/if}
+                    {if $visible->section_team == "ANO"}<li><a n:href="Homepage:default#team">Team</a></li>{/if}
+                    {if $visible->section_download == "ANO"}<li><a n:href="Download:default#">Ke stažení</a></li>{/if}
+                    {if $visible->section_gallery == "ANO"}<li><a n:href="Homepage:default#portfolio">Fotogalerie</a></li>{/if}
+                    {if $visible->section_food == "ANO"}<li><a n:href="Food:default">Jídelníček</a></li>{/if}
+                    {if $visible->section_contact == "ANO"}<li><a n:href="Homepage:default#contact">Kontakt</a></li>{/if}
+                    {if $user->isLoggedIn()}
+                        <li class="menu-has-children">
+                            <a href="#">Nastavení</a>
+                            <ul>
+                                <li><a n:href="Sign:edit $user->getIdentity()->id"><i class="fa fa-user-o"></i> {$user->getIdentity()->email}</a></li>
+                                {if $user->isInRole('Admin')}
+                                    {if $visible->section_news == "ANO"}<li><a n:href="Articles:default">Aktuality</a></li>{/if}
+                                    {if $visible->section_gallery == "ANO"}<li><a n:href="Gallery:default">Fotogalerie</a></li>{/if}
+                                    <li><a n:href="Organisation:default">Organizace</a></li>
+                                    <li><a n:href="Content:default">Obsah webu</a></li>
+                                    <li><a n:href="Sign:default">Uživatelé</a></li>
+                                {/if}
+                                <li><a n:href="Sign:out">Odhlásit</a></li>
+                            </ul>
+                        </li>
+                    {/if}
+                    
+                </ul>
+            </nav><!-- #nav-menu-container -->
+        </div>
+    </header><!-- #header -->
+
+    <!-- #main section-->
+    <main id="main">
+        <div class="container">
+            <div n:foreach="$flashes as $flash" n:class="alert, 'alert-' . $flash->type"><br>{$flash->message}</div>
+        </div>
+        
+        <!-- include content -->
+        {include content}
+        <footer id="footer">
+            <div class="container">
+                <div class="copyright">
+                    <p><i>Pravá vesnická mateřská školka, Val 14 | &copy; 2020 |
+                        {if $user->isLoggedIn()}
+                            {if $user->isInRole('Admin')}
+                                <a n:href="Sign:out">Odhlásit</a>
+                            {/if}
+                        {else}
+                            <a n:href="Sign:in">Administrace</a>
+                            <!--<li><a n:href="Sign:up">Registrovat</a></li>-->
+                        {/if}
+                    </i></p>
+                    Thanx to &copy;<strong>BizPage</strong>. All Rights Reserved | Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                </div>
+            </div>
+        </footer>
+    </main>
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+    {block scripts}
+    
+    <!-- COOKIES INFO -->
+    <script type="text/javascript" id="cookieinfo"
+        src="//cookieinfoscript.com/js/cookieinfo.min.js"
+        data-bg="#3EA50D"
+        data-fg="#FFFFFF"
+        data-link="#F1D600"
+        data-message="Tento web používá k poskytování služeb soubory cookie. Používáním tohoto webu s tím souhlasíte."
+        data-moreinfo="https://cs.wikipedia.org/wiki/HTTP_cookie"
+        data-linkmsg="Co je cookies?"
+        data-cookie="CookieInfoScript"
+        data-text-align="center"
+        data-close-text="Souhlasím!">
+    </script>
+
+    
+      <!-- JavaScript Libraries -->
+    <script src="{$basePath}/lib/jquery/jquery-migrate.min.js"></script>
+    <script src="{$basePath}/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{$basePath}/lib/easing/easing.min.js"></script>
+    <script src="{$basePath}/lib/superfish/hoverIntent.js"></script>
+    <script src="{$basePath}/lib/superfish/superfish.min.js"></script>
+    <script src="{$basePath}/lib/wow/wow.min.js"></script>
+    <script src="{$basePath}/lib/waypoints/waypoints.min.js"></script>
+    <script src="{$basePath}/lib/counterup/counterup.min.js"></script>
+    <script src="{$basePath}/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="{$basePath}/lib/isotope/isotope.pkgd.min.js"></script>
+    <script src="{$basePath}/lib/lightbox/js/lightbox.min.js"></script>
+    <script src="{$basePath}/lib/touchSwipe/jquery.touchSwipe.min.js"></script>
+
+    <!-- Template Main Javascript File -->
+    <script src="{$basePath}/js/main.js"></script>
+    {/block}
+</body>
+</html>

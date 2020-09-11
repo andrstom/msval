@@ -1,0 +1,43 @@
+{block content}
+<section id="about">
+    <div class="container">
+        <header class="section-header">
+            <h3>Napsali o nás</h3>
+            <hr>
+            <a n:href="Homepage:default" class="btn btn-outline-success">Domů</a>
+        </header>
+        <br>
+        <div class="row about-cols">
+            {foreach $ranks as $rank}
+                <div class="col-md-4">
+                    <div class="about-col">
+                        <br>
+                        <center>
+                            <p><small>Napsal: 
+                            {if $rank->editor}
+                                {$rank->editor} ({$rank->created_at|date:'d.m.Y'})
+                            {else}
+                                {$rank->creator} ({$rank->created_at|date:'d.m.Y'})
+                            {/if}
+                            </small></p>
+                            <img src="{$basePath}/img/star-{$rank->stars}.png" alt="Star">
+                            <h4 class="title">{$rank->title}</h4>
+                        </center>
+                        <p>{$rank->content|noescape}</p>
+                        
+                        <br>
+                        {if $user->isLoggedIn()}
+                            {if $user->isInRole('Admin')}
+                                <hr>
+                                <p class="text-center">
+                                    <a n:href="Rank:edit $rank->id" class="btn btn-info" title="Upravit"><i class="ion-edit"></i></a>
+                                    <a n:href="Rank:delete $rank->id" class="btn btn-danger" title="Smazat" onclick="return confirm('Opravdu smazat tento příspěvek?');"><i class="ion-trash-a"></i></a>
+                                </p>
+                            {/if}
+                        {/if}
+                    </div>
+                </div>
+            {/foreach}
+        </div>
+    </div>
+</section>

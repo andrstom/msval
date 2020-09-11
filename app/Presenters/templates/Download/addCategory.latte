@@ -1,0 +1,49 @@
+{block content}
+<section id="about">
+    <div class="container">
+        <header class="section-header">
+            <h2 class="section-title">Přidat kategorii</h2>
+        </header>
+        <hr>
+        <a n:href="Download:default" class="btn btn-outline-danger">Zpět</a>
+        <br><br>
+        <div class="row">
+            <div class="col-lg-4">
+                {if $user->isLoggedIn()}
+                    {if $user->isInRole('Admin')}
+                        {include bootstrap-form downloadCategoryForm}
+                    {/if}
+                {/if}
+                <hr>
+                <table class="table table-responsive-md table-light">
+                    <thead>
+                        <tr>
+                            <th>Název</th>
+                            <th>Upravit</th>
+                            <th>Odstranit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {if !isset($fileCategories->fetch()->name)}
+                            <tr>
+                                <td colspan="3"><center>Žádná kategorie.</center></td>
+                            </tr>
+                        {else}
+                            {foreach $fileCategories as $fileCategory}
+                                <tr>
+                                    <td>{$fileCategory->name}</td>
+                                    {if $user->isLoggedIn()}
+                                        {if $user->isInRole('Admin')}
+                                            <td><a n:href="Download:editCategory $fileCategory->id" class="btn btn-primary"><i class="ion-edit"></i></a></td>
+                                            <td>{if $fileCategory->id > 1}<a n:href="Download:deleteCategory $fileCategory->id" class="btn btn-danger" onclick="return confirm('Opravdu smazat?');"><i class="ion-trash-a"></i></a>{/if}</td>
+                                        {/if}
+                                    {/if}
+                                </tr>
+                            {/foreach}
+                        {/if}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>

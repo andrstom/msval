@@ -1,0 +1,85 @@
+{block content}
+<section id="about">
+    <div class="container">
+        <header class="section-header">
+            <h2 n:block=title>Přidat organizaci</h2>
+            <hr>
+            <a n:href="Organisation:default" class="btn btn-outline-success">Zpět</a>
+        </header>
+        <br>
+        <div class="row">
+            <div class="col-lg-12">
+                {form organisationForm}
+                    <ul class="errors" n:if="$form->hasErrors()">
+                        <li n:foreach="$form->errors as $error">{$error}</li>
+                    </ul>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            {label short_name}{input short_name}<br>
+                            {label name}{input name}<br>
+                            {foreach $form->getComponents() as $sid => $cntrl}
+                                {if $cntrl instanceof Contributte\FormMultiplier\Multiplier}
+                                    {foreach $cntrl->getControls() as $key => $c}
+                                        {label $c /}{input $c}
+                                    {/foreach}
+                                {/if}
+                            {/foreach}<br>
+                        </div>
+                        <br>
+                        <div class="col-lg-3">
+                            {label email}{input email}<br>
+                            {label phone}{input phone}<br>
+                            {label gsm}{input gsm}<br>
+                        </div>
+                        <br>
+                        <div class="col-lg-3">
+                            {label street}{input street}<br>
+                            {label city}{input city}<br>
+                            {label postal}{input postal}
+                        </div>
+                        <br>
+                        <div class="col-lg-2">
+                            {label ico}{input ico}<br>
+                            {label dic}{input dic}<br>
+                            {label account}{input account}
+                        </div>
+                    </div>
+                    <br>
+                    <h4>Viditelné sekce webu</h4>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            {label section_about}{input section_about}<br>
+                            {label section_universal}{input section_universal}<br>
+                            {label section_team}{input section_team}
+                            
+                        </div>
+                        <br>
+                        <div class="col-lg-3">
+                            {label section_gallery}{input section_gallery}<br>
+                            {label section_news}{input section_news}<br>
+                            {label section_rank}{input section_rank}
+                            
+                        </div>
+                        <br>
+                        <div class="col-lg-3">
+                            {label section_sponsors}{input section_sponsors}<br>
+                            {label section_clients}{input section_clients}<br>
+                            {label section_contact}{input section_contact}
+                        </div>
+                        <br>
+                        <div class="col-lg-2">
+
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            {label send}{input send}
+                        </div>
+                    </div>
+
+                {/form}
+            </div>
+        </div>
+    </div>
+</section>
