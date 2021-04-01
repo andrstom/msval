@@ -50,7 +50,7 @@ final class SectionDetailFormFactory {
 
         $form->addTextarea('detail_content', 'Obsah')
                 ->setAttribute('rows', 10)
-                ->setHtmlAttribute('class', 'form-control');
+                ->setHtmlAttribute('class', 'form-control tinyEditor');
 
         // set dafault number of samples
         $copies = 1;

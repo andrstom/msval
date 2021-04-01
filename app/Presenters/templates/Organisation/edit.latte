@@ -110,6 +110,7 @@
                                 <p>{$employee->position}</p>
                                 <p>{$employee->email}</p>
                                 <p>{$employee->gsm}</p>
+                                <p>{$employee->notice}</p>
                                 <hr>
                                 <p>
                                     {if $user->isLoggedIn()}
@@ -141,6 +142,7 @@
                                     <p>{label position /}{input position}</p>
                                     <p>{label email /}{input email}</p>
                                     <p>{label gsm /}{input gsm}</p>
+                                    <p>{label notice /}{input notice}</p>
                                     {foreach $form->getComponents() as $sid => $cntrl}
                                         {if $cntrl instanceof Contributte\FormMultiplier\Multiplier}
                                             {foreach $cntrl->getControls() as $key => $c}

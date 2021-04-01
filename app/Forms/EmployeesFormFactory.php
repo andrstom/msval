@@ -64,6 +64,10 @@ final class EmployeesFormFactory {
         $form->addText('gsm', 'Telefon')
                 ->setHtmlAttribute('class', 'form-control');
         
+        $form->addTextArea('notice', 'Poznámka')
+                ->setHtmlAttribute('class', 'form-control')
+                ->addRule($form::MAX_LENGTH, 'Poznámka je příliš dlouhá', 255);
+        
         // set dafault number of samples
         $copies = 1;
 
@@ -72,7 +76,7 @@ final class EmployeesFormFactory {
 
         $multiplier = $form->addMultiplier('formImages', function (Container $container, Form $form) {
 
-            $container->addUpload('image', 'Fotka parťáka (přípona jpg/JPG):')
+            $container->addUpload('image', 'Fotka parťáka (jpg/JPG):')
                     ->setHtmlAttribute('class', 'form-control')
                     ->addRule(Form::IMAGE, 'Musí být JPEG, PNG nebo GIF.')
                     ->addRule(Form::MAX_FILE_SIZE, 'Maximální velikost souboru je 5 MB.', 5000 * 1024);
@@ -86,17 +90,12 @@ final class EmployeesFormFactory {
         $form->onSuccess[] = function (Form $form, \stdClass $values) use ($organisationId, $employeeId, $onSuccess): void {
 
             if(!$employeeId) {
-                
                 // Add
                 $this->employeesManager->addEmployee($this->user, $organisationId, $values);
-                
             } else {
-                
                 // Edit
                 $this->employeesManager->editEmployee($this->user, $organisationId, $employeeId, $values);
-                
             }
-
             $onSuccess();
         };
         return $form;

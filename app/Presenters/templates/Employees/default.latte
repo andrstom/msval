@@ -18,6 +18,7 @@
                             <th>Jméno</th>
                             <th>Email</th>
                             <th>Telefon</th>
+                            <th>Poznámka</th>
                             <th>Pozice</th>
                             <th>Organizace</th>
                             <th>Upravit</th>
@@ -37,6 +38,7 @@
                                     <td>{$employee->firstname}</td>
                                     <td>{$employee->email}</td>
                                     <td>{$employee->gsm}</td>
+                                    <td>{$employee->notice}</td>
                                     <td>{$employee->position}</td>
                                     <td>{$employee->ref('organisation')->short_name}</td>
                                     {if $user->isInRole('Admin')}

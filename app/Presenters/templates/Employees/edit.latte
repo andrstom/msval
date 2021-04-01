@@ -26,6 +26,7 @@
                                 <p>{label position /}{input position}</p>
                                 <p>{label email /}{input email}</p>
                                 <p>{label gsm /}{input gsm}</p>
+                                <p>{label notice /}{input notice}</p>
                                 {foreach $form->getComponents() as $sid => $cntrl}
                                     {if $cntrl instanceof Contributte\FormMultiplier\Multiplier}
                                         {foreach $cntrl->getControls() as $key => $c}

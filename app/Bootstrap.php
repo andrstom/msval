@@ -10,7 +10,7 @@ class Bootstrap {
     public static function boot(): Configurator {
         $configurator = new Configurator;
 
-        $configurator->setDebugMode('109.105.54.20'); // enable for your remote IP
+        //$configurator->setDebugMode('109.105.54.20'); // enable for your remote IP
         $configurator->enableTracy(__DIR__ . '/../log');
 
         $configurator->setTimeZone('Europe/Prague');

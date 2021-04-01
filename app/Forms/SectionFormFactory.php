@@ -80,7 +80,7 @@ final class SectionFormFactory {
 
         $form->addTextarea('section_content', 'Obsah')
                 ->setAttribute('rows', 20)
-                ->setHtmlAttribute('class', 'form-control');
+                ->setHtmlAttribute('class', 'form-control tinyEditor');
 
         $form->addSelect('section_type', '* Typ', $section_names)
                 ->setRequired('Vyplňte Nadpis')

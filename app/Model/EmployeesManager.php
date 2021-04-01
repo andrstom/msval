@@ -21,6 +21,7 @@ class EmployeesManager {
             COLUMN_EMAIL = 'email',
             COLUMN_PHONE = 'phone',
             COLUMN_GSM = 'gsm',
+            COLUMN_NOTICE = 'notice',
             COLUMN_POSITION = 'position',
             COLUMN_CREATOR = 'creator',
             COLUMN_CREATED_AT = 'created_at',
@@ -57,6 +58,7 @@ class EmployeesManager {
                         self::COLUMN_POSITION => $values->position,
                         self::COLUMN_EMAIL => $values->email,
                         self::COLUMN_GSM => $values->gsm,
+                        self::COLUMN_NOTICE => $values->notice,
                         self::COLUMN_CREATOR => $logged_user->getIdentity()->getData()['email'],
                         self::COLUMN_CREATED_AT => time()
                     ]);
@@ -69,18 +71,14 @@ class EmployeesManager {
         
         // upload image
         foreach ($values->formImages as $k => $formImage) {
-
             if ($formImage->image->hasFile()) {
-
                 try {
                     // update url
                     $insertFoto = $this->database->table(self::TABLE_ORGANISATION_EMPLOYEES)->get($lastId)->update([
                             self::COLUMN_IMAGE => '/organisations/' . $organisation_id . '/image_employee_' . $lastId . $this->fileManager->getSuffix($formImage->image),
                         ]);
-
                     // upload
                     $upload = $this->fileManager->uploadEmployeeFoto($values, $formImage->image, $organisation_id, $lastId);
-
                 } catch (\Exception $e) {
                     throw new EmployeesException('Chyba při nahrávání fotky parťáka (detail - \App\Model\OraganisationManager::addEmployee()->upload()) ' . $e->getMessage());
                 }
@@ -105,6 +103,7 @@ class EmployeesManager {
                             self::COLUMN_POSITION => $values->position,
                             self::COLUMN_EMAIL => $values->email,
                             self::COLUMN_GSM => $values->gsm,
+                            self::COLUMN_NOTICE => $values->notice,
                             self::COLUMN_EDITOR => $logged_user->getIdentity()->getData()['email'],
                             self::COLUMN_EDITED_AT => time()
                     ]);
@@ -115,19 +114,14 @@ class EmployeesManager {
         
         // upload image
         foreach ($values->formImages as $k => $formImage) {
-
             if ($formImage->image->hasFile()) {
-
                 try {
-
                     // update url
                     $updateFoto = $this->database->table(self::TABLE_ORGANISATION_EMPLOYEES)->get($employee_id)->update([
                             self::COLUMN_IMAGE => '/organisations/' . $organisation_id . '/image_employee_' . $employee_id . $this->fileManager->getSuffix($formImage->image),
                         ]);
-
                     // upload
                     $upload = $this->fileManager->uploadEmployeeFoto($values, $formImage->image, $organisation_id, $employee_id);
-
                 } catch (\Exception $e) {
                     throw new EmployeesException('Chyba při nahrávání fotky parťáka (detail - \App\Model\OraganisationManager::editEmployee()->upload()) ' . $e->getMessage());
                 }

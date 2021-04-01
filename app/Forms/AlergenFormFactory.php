@@ -52,7 +52,7 @@ final class AlergenFormFactory {
                 ->setHtmlAttribute('class', 'form-control');
 
         $form->addTextArea('detail', 'Popis')
-                ->setHtmlAttribute('class', 'form-control');
+                ->setHtmlAttribute('class', 'form-control tinyEditor');
 
         // set dafault number of samples
         $copies = 1;

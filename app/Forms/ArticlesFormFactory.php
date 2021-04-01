@@ -56,7 +56,8 @@ final class ArticlesFormFactory {
                 ->setRequired('Vyplňte Nadpis');
 
         $form->addTextArea('content', 'Obsah')
-                ->setAttribute('rows', 15);
+                ->setAttribute('rows', 15)
+                ->setHtmlAttribute('class', 'form-control tinyEditor');
 
         // set dafault number of samples
         $copies = 1;
